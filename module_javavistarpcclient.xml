@@ -2,9 +2,6 @@
 <project name="module_javavistarpcclient" default="compile.module.javavistarpcclient">
   <dirname property="module.javavistarpcclient.basedir" file="${ant.file.module_javavistarpcclient}"/>
   
-  <property name="module.jdk.home.javavistarpcclient" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.javavistarpcclient" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.javavistarpcclient" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.javavistarpcclient" value="${compiler.args}"/>
   
@@ -16,25 +13,23 @@
   </path>
   
   <path id="javavistarpcclient.module.production.classpath">
-    <path refid="${module.jdk.classpath.javavistarpcclient}"/>
-    <pathelement location="${idea.home}/lib/junit-4.10.jar"/>
+    <pathelement location="${basedir}/lib/junit-4.10.jar"/>
   </path>
   
   <path id="javavistarpcclient.runtime.production.module.classpath">
     <pathelement location="${javavistarpcclient.output.dir}"/>
-    <pathelement location="${idea.home}/lib/junit-4.10.jar"/>
+    <pathelement location="${basedir}/lib/junit-4.10.jar"/>
   </path>
   
   <path id="javavistarpcclient.module.classpath">
-    <path refid="${module.jdk.classpath.javavistarpcclient}"/>
     <pathelement location="${javavistarpcclient.output.dir}"/>
-    <pathelement location="${idea.home}/lib/junit-4.10.jar"/>
+    <pathelement location="${basedir}/lib/junit-4.10.jar"/>
   </path>
   
   <path id="javavistarpcclient.runtime.module.classpath">
     <pathelement location="${javavistarpcclient.testoutput.dir}"/>
     <pathelement location="${javavistarpcclient.output.dir}"/>
-    <pathelement location="${idea.home}/lib/junit-4.10.jar"/>
+    <pathelement location="${basedir}/lib/junit-4.10.jar"/>
   </path>
   
   
@@ -63,7 +58,7 @@
   
   <target name="compile.module.javavistarpcclient.production" description="Compile module JavaVistARPCClient; production classes">
     <mkdir dir="${javavistarpcclient.output.dir}"/>
-    <javac destdir="${javavistarpcclient.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.javavistarpcclient}/javac">
+    <javac destdir="${javavistarpcclient.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.javavistarpcclient}"/>
       <bootclasspath refid="javavistarpcclient.module.bootclasspath"/>
       <classpath refid="javavistarpcclient.module.production.classpath"/>
@@ -81,7 +76,7 @@
   
   <target name="compile.module.javavistarpcclient.tests" depends="compile.module.javavistarpcclient.production" description="compile module JavaVistARPCClient; test classes" unless="skip.tests">
     <mkdir dir="${javavistarpcclient.testoutput.dir}"/>
-    <javac destdir="${javavistarpcclient.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.javavistarpcclient}/javac">
+    <javac destdir="${javavistarpcclient.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.javavistarpcclient}"/>
       <bootclasspath refid="javavistarpcclient.module.bootclasspath"/>
       <classpath refid="javavistarpcclient.module.classpath"/>
