@@ -27,9 +27,9 @@ import com.chrisuyehara.vista.rpc.procedures.XWB.Disconnect;
 
 import java.io.IOException;
 
-public class Client {
+public class RPCClient {
 
-    private Socket socket;
+    private RPCSocket RPCSocket;
     private String hostName;
     private int port;
 
@@ -39,7 +39,7 @@ public class Client {
 
     private boolean validAvCode = false;
 
-    public Client(String hostName, int port) {
+    public RPCClient(String hostName, int port) {
         this.hostName = hostName;
         this.port = port;
     }
@@ -47,10 +47,10 @@ public class Client {
     public void connect() throws ConnectException {
         if (!isConnected()) {
             try {
-                socket = new Socket();
-                socket.connect(hostName, port);
+                RPCSocket = new RPCSocket();
+                RPCSocket.connect(hostName, port);
 
-                Connect connect = new Connect(socket.getLocalIpAddress(), socket.getHostName());
+                Connect connect = new Connect(RPCSocket.getLocalIpAddress(), RPCSocket.getHostName());
                 call(connect);
 
                 if (!connect.isConnectionAccepted()) {
@@ -65,16 +65,16 @@ public class Client {
     }
 
     public boolean isConnected() {
-        if (null == socket) {
+        if (null == RPCSocket) {
             return false;
         }
-        return socket.isConnected();
+        return RPCSocket.isConnected();
     }
 
     public void disconnect() {
         if (isConnected()) {
             call(new Disconnect());
-            socket.disconnect();
+            RPCSocket.disconnect();
         }
     }
 
@@ -110,7 +110,7 @@ public class Client {
     }
 
     public synchronized void call(AbstractRemoteProcedure remoteProcedure) {
-        socket.call(remoteProcedure);
+        RPCSocket.call(remoteProcedure);
     }
 
     public String getContext() {

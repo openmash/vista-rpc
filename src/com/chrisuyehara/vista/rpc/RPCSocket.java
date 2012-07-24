@@ -26,11 +26,11 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Socket {
+public class RPCSocket {
 
     private java.net.Socket socket = new java.net.Socket();
 
-    public Socket() {
+    public RPCSocket() {
     }
 
     public void connect(String hostname, int port) throws IOException, SocketTimeoutException {

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="javavistarpcclient" default="all">
+<!--
+  ~ Copyright 2012 Chris Uyehara
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<project name="vistarpcclient" default="all">
   
   
   <property file="vistarpcclient.properties"/>
@@ -62,40 +78,139 @@
   </patternset>
   
   
-  <!-- Global Libraries -->
+  <!-- Application Server Libraries -->
   
   <!-- Modules -->
   
-  <import file="${basedir}/module_javavistarpcclient.xml"/>
+  
+  <!-- Module VistARPCClient -->
+  
+  <dirname property="module.vistarpcclient.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.vistarpcclient" value="${compiler.args}"/>
+  
+  <property name="vistarpcclient.output.dir" value="${module.vistarpcclient.basedir}/out/production/VistARPCClient"/>
+  <property name="vistarpcclient.testoutput.dir" value="${module.vistarpcclient.basedir}/out/test/VistARPCClient"/>
+  
+  <path id="vistarpcclient.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="vistarpcclient.module.production.classpath">
+    <pathelement location="${basedir}/lib/junit-4.10.jar"/>
+  </path>
+  
+  <path id="vistarpcclient.runtime.production.module.classpath">
+    <pathelement location="${vistarpcclient.output.dir}"/>
+    <pathelement location="${basedir}/lib/junit-4.10.jar"/>
+  </path>
+  
+  <path id="vistarpcclient.module.classpath">
+    <pathelement location="${vistarpcclient.output.dir}"/>
+    <pathelement location="${basedir}/lib/junit-4.10.jar"/>
+  </path>
+  
+  <path id="vistarpcclient.runtime.module.classpath">
+    <pathelement location="${vistarpcclient.testoutput.dir}"/>
+    <pathelement location="${vistarpcclient.output.dir}"/>
+    <pathelement location="${basedir}/lib/junit-4.10.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.vistarpcclient">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.vistarpcclient">
+    <patternset refid="excluded.from.module.vistarpcclient"/>
+  </patternset>
+  
+  <path id="vistarpcclient.module.sourcepath">
+    <dirset dir="${module.vistarpcclient.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="vistarpcclient.module.test.sourcepath">
+    <dirset dir="${module.vistarpcclient.basedir}">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.vistarpcclient" depends="compile.module.vistarpcclient.production,compile.module.vistarpcclient.tests" description="Compile module VistARPCClient"/>
+  
+  <target name="compile.module.vistarpcclient.production" description="Compile module VistARPCClient; production classes">
+    <mkdir dir="${vistarpcclient.output.dir}"/>
+    <javac destdir="${vistarpcclient.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.vistarpcclient}"/>
+      <bootclasspath refid="vistarpcclient.module.bootclasspath"/>
+      <classpath refid="vistarpcclient.module.production.classpath"/>
+      <src refid="vistarpcclient.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.vistarpcclient"/>
+    </javac>
+    
+    <copy todir="${vistarpcclient.output.dir}">
+      <fileset dir="${module.vistarpcclient.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.vistarpcclient.tests" depends="compile.module.vistarpcclient.production" description="compile module VistARPCClient; test classes" unless="skip.tests">
+    <mkdir dir="${vistarpcclient.testoutput.dir}"/>
+    <javac destdir="${vistarpcclient.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.vistarpcclient}"/>
+      <bootclasspath refid="vistarpcclient.module.bootclasspath"/>
+      <classpath refid="vistarpcclient.module.classpath"/>
+      <src refid="vistarpcclient.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.vistarpcclient"/>
+    </javac>
+    
+    <copy todir="${vistarpcclient.testoutput.dir}">
+      <fileset dir="${module.vistarpcclient.basedir}/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.vistarpcclient" description="cleanup module">
+    <delete dir="${vistarpcclient.output.dir}"/>
+    <delete dir="${vistarpcclient.testoutput.dir}"/>
+  </target>
   
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
   </target>
   
-  <target name="clean" depends="clean.module.javavistarpcclient" description="cleanup all"/>
+  <target name="clean" depends="clean.module.vistarpcclient" description="cleanup all"/>
   
-  <target name="build.modules" depends="init, clean, compile.module.javavistarpcclient" description="build all modules"/>
+  <target name="build.modules" depends="init, clean, compile.module.vistarpcclient" description="build all modules"/>
   
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
-    <property name="artifact.output.rpc-client" value="${basedir}/out/artifacts/rpc_client"/>
+    <property name="artifact.output.vistarpcclient" value="${basedir}/out/artifacts/VistARPCClient"/>
     <mkdir dir="${artifacts.temp.dir}"/>
-    <property name="temp.jar.path.rpc-client.jar" value="${artifacts.temp.dir}/rpc-client.jar"/>
+    <property name="temp.jar.path.VistARPCClient.jar" value="${artifacts.temp.dir}/VistARPCClient.jar"/>
   </target>
   
-  <target name="artifact.rpc-client" depends="init.artifacts, compile.module.javavistarpcclient" description="Build &#39;rpc-client&#39; artifact">
-    <property name="artifact.temp.output.rpc-client" value="${artifacts.temp.dir}/rpc_client"/>
-    <mkdir dir="${artifact.temp.output.rpc-client}"/>
-    <jar destfile="${temp.jar.path.rpc-client.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
-      <zipfileset dir="${javavistarpcclient.output.dir}"/>
+  <target name="artifact.vistarpcclient" depends="init.artifacts, compile.module.vistarpcclient" description="Build &#39;VistARPCClient&#39; artifact">
+    <property name="artifact.temp.output.vistarpcclient" value="${artifacts.temp.dir}/VistARPCClient"/>
+    <mkdir dir="${artifact.temp.output.vistarpcclient}"/>
+    <jar destfile="${temp.jar.path.VistARPCClient.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${vistarpcclient.output.dir}"/>
     </jar>
-    <copy file="${temp.jar.path.rpc-client.jar}" tofile="${artifact.temp.output.rpc-client}/rpc-client.jar"/>
+    <copy file="${temp.jar.path.VistARPCClient.jar}" tofile="${artifact.temp.output.vistarpcclient}/VistARPCClient.jar"/>
   </target>
   
-  <target name="build.all.artifacts" depends="artifact.rpc-client" description="Build all artifacts">
-    <mkdir dir="${artifact.output.rpc-client}"/>
-    <copy todir="${artifact.output.rpc-client}">
-      <fileset dir="${artifact.temp.output.rpc-client}"/>
+  <target name="build.all.artifacts" depends="artifact.vistarpcclient" description="Build all artifacts">
+    <mkdir dir="${artifact.output.vistarpcclient}"/>
+    <copy todir="${artifact.output.vistarpcclient}">
+      <fileset dir="${artifact.temp.output.vistarpcclient}"/>
     </copy>
     
     <!-- Delete temporary files -->

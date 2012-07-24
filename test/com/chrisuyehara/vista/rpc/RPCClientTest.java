@@ -23,11 +23,11 @@ import com.chrisuyehara.vista.rpc.exceptions.LoginException;
 import com.chrisuyehara.vista.rpc.models.NewPerson;
 import com.chrisuyehara.vista.rpc.procedures.XUS.GetUserInfo;
 
-public class ClientTest {
+public class RPCClientTest {
 
     @Test
     public void testConnect() {
-        Client c = new Client("192.168.10.3", 9200);
+        RPCClient c = new RPCClient("192.168.10.3", 9200);
         try {
             c.connect();
         } catch (ConnectException e) {
@@ -39,7 +39,7 @@ public class ClientTest {
 
     @Test
     public void testDisconnect() {
-        Client c = new Client("192.168.10.3", 9200);
+        RPCClient c = new RPCClient("192.168.10.3", 9200);
         try {
             c.connect();
         } catch (ConnectException e) {
@@ -52,7 +52,7 @@ public class ClientTest {
 
     @Test
     public void testLoginPass() {
-        Client c = new Client("192.168.10.3", 9200);
+        RPCClient c = new RPCClient("192.168.10.3", 9200);
 
         try {
             c.login("!QAZ1qaz!QAZ", "rfvtgbyhn!UJM7");
@@ -63,7 +63,7 @@ public class ClientTest {
 
     @Test
     public void testLoginFail() {
-        Client c = new Client("192.168.10.3", 9200);
+        RPCClient c = new RPCClient("192.168.10.3", 9200);
 
         try {
             c.login("!QAZ1qaz!QAZ", "abc");
@@ -76,7 +76,7 @@ public class ClientTest {
 
     @Test
     public void testLoginPass2() {
-        Client c = new Client("192.168.10.3", 9200);
+        RPCClient c = new RPCClient("192.168.10.3", 9200);
 
         try {
             c.login("!QAZ1qaz!QAZ", "rfvtgbyhn!UJM7");
@@ -94,7 +94,7 @@ public class ClientTest {
 
     @Test
     public void testContextPass() {
-        Client c = new Client("192.168.10.3", 9200);
+        RPCClient c = new RPCClient("192.168.10.3", 9200);
 
         try {
             c.login("!QAZ1qaz!QAZ", "rfvtgbyhn!UJM7");

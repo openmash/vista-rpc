@@ -26,7 +26,7 @@ public class DebugParameters {
 
     @Test
     public void testLoginPass() {
-        Client c = new Client("192.168.10.3", 9200);
+        RPCClient c = new RPCClient("192.168.10.3", 9200);
 
         try {
             c.login("!QAZ1qaz!QAZ", "rfvtgbyhn!UJM7");
