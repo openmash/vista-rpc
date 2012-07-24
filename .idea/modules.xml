@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JavaVistARPCClient.iml" filepath="$PROJECT_DIR$/JavaVistARPCClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VistARPCClient.iml" filepath="$PROJECT_DIR$/VistARPCClient.iml" />
     </modules>
   </component>
 </project>

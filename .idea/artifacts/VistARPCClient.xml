@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="VistARPCClient">
+    <output-path>$PROJECT_DIR$/out/artifacts/VistARPCClient</output-path>
+    <root id="archive" name="VistARPCClient.jar">
+      <element id="module-output" name="VistARPCClient" />
+    </root>
+  </artifact>
+</component>
