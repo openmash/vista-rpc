@@ -31,12 +31,20 @@ public class OrderedList implements Iterable<KeyValuePair> {
         keyValuePairs.add(keyValuePair);
     }
 
+    public void add(String key, String value) {
+        keyValuePairs.add(new KeyValuePair(key, value));
+    }
+
     public KeyValuePair get(int index) throws IndexOutOfBoundsException {
         return keyValuePairs.get(index);
     }
 
     public void set(int index, KeyValuePair keyValuePair) {
         keyValuePairs.set(index, keyValuePair);
+    }
+
+    public void set(int index, String key, String value) {
+        keyValuePairs.set(index, new KeyValuePair(key, value));
     }
 
     public int size() {

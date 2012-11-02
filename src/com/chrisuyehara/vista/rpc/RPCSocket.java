@@ -33,8 +33,8 @@ public class RPCSocket {
     public RPCSocket() {
     }
 
-    public void connect(String hostname, int port) throws IOException, SocketTimeoutException {
-        socket.connect(new InetSocketAddress(hostname, port));
+    public void connect(String hostName, int port) throws IOException, SocketTimeoutException {
+        socket.connect(new InetSocketAddress(hostName, port));
     }
 
     public void disconnect() {
@@ -67,7 +67,7 @@ public class RPCSocket {
         return null;
     }
 
-    public synchronized void call(AbstractRemoteProcedure remoteProcedure) {
+    public synchronized void call(AbstractRemoteProcedure remoteProcedure) throws IOException {
         String procedure = remoteProcedure.toProcedure();
 
         InputStream inputStream;
@@ -102,6 +102,7 @@ public class RPCSocket {
             remoteProcedure.setResponse(new String(byteResponse));
         } catch (IOException e) {
             remoteProcedure.setResponse(null);
+            throw e;
         }
     }
 

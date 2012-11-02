@@ -21,6 +21,18 @@ import com.chrisuyehara.vista.rpc.procedures.RemoteProcedure;
 
 public class CreateContext extends RemoteProcedure {
 
+    public static final String CONTEXT_AUDIOGRAM_DATA = "ACKQROES3";
+    public static final String CONTEXT_AUDIOGRAM_EDIT = "ACKQROES3E";
+    public static final String CONTEXT_CPRS = "OR CPRS GUI CHART";
+    public static final String CONTEXT_SIGNON = "XUS SIGNON";
+    public static final String CONTEXT_CAPRI = "DVBA CAPRI GUI";
+    public static final String CONTEXT_ESIG = "XOBE ESIG USER";
+    public static final String CONTEXT_EVENT_CAPTURE = "EC GUI CONTEXT";
+    public static final String CONTEXT_KERNEL_ALERTS = "XQAL GUI ALERTS";
+    public static final String CONTEXT_MENTAL_HEALTH_ASSISTANT = "YS BROKER1";
+    public static final String CONTEXT_PCE_RECORD_MANAGER = "VEJD PCE RECORD MANAGER";
+    public static final String CONTEXT_QUADRAMED = "VEJD VG FOR QM MEDREC";
+
     private String context;
 
     public CreateContext(String context) {

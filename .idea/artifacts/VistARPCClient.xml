@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="VistARPCClient">
+  <artifact type="jar" build-on-make="true" name="VistARPCClient">
     <output-path>$PROJECT_DIR$/out/artifacts/VistARPCClient</output-path>
     <root id="archive" name="VistARPCClient.jar">
       <element id="module-output" name="VistARPCClient" />
