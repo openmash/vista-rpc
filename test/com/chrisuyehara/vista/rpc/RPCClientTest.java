@@ -16,21 +16,21 @@
 
 package com.chrisuyehara.vista.rpc;
 
-import junit.framework.Assert;
-import org.junit.Test;
 import com.chrisuyehara.vista.rpc.exceptions.ConnectException;
 import com.chrisuyehara.vista.rpc.exceptions.LoginException;
 import com.chrisuyehara.vista.rpc.models.NewPerson;
 import com.chrisuyehara.vista.rpc.procedures.XUS.GetUserInfo;
+import com.chrisuyehara.vista.rpc.procedures.XWB.CreateContext;
+import junit.framework.Assert;
+import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Timer;
 
 public class RPCClientTest {
 
     @Test
     public void testConnect() {
-        RPCClient c = new RPCClient("192.168.10.3", 9200);
+        RPCClient c = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
         try {
             c.connect();
         } catch (ConnectException e) {
@@ -44,7 +44,7 @@ public class RPCClientTest {
 
     @Test
     public void testDisconnect() {
-        RPCClient c = new RPCClient("192.168.10.3", 9200);
+        RPCClient c = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
         try {
             c.connect();
         } catch (ConnectException e) {
@@ -59,10 +59,10 @@ public class RPCClientTest {
 
     @Test
     public void testLoginPass() {
-        RPCClient c = new RPCClient("192.168.10.3", 9200);
+        RPCClient c = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
 
         try {
-            c.login("!QAZ1qaz!QAZ", "rfvtgbyhn!UJM7");
+            c.login(TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
         } catch (LoginException e) {
             Assert.fail("Login shouldn't have failed");
         } catch (IOException e) {
@@ -72,10 +72,10 @@ public class RPCClientTest {
 
     @Test
     public void testLoginFail() {
-        RPCClient c = new RPCClient("192.168.10.3", 9200);
+        RPCClient c = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
 
         try {
-            c.login("!QAZ1qaz!QAZ", "abc");
+            c.login(TestHarness.ACCESS_CODE, TestHarness.ACCESS_CODE);
         } catch (LoginException e) {
             return;
         } catch (IOException e) {
@@ -87,10 +87,10 @@ public class RPCClientTest {
 
     @Test
     public void testLoginPass2() {
-        RPCClient c = new RPCClient("192.168.10.3", 9200);
+        RPCClient c = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
 
         try {
-            c.login("!QAZ1qaz!QAZ", "rfvtgbyhn!UJM7");
+            c.login(TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
         } catch (LoginException e) {
             Assert.fail("Login shouldn't have failed");
         } catch (IOException e) {
@@ -114,7 +114,7 @@ public class RPCClientTest {
         RPCClient c = new RPCClient("192.168.10.3", 9200);
 
         try {
-            c.login("!QAZ1qaz!QAZ", "rfvtgbyhn!UJM7");
+            c.login(TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
         } catch (LoginException e) {
             Assert.fail("Login shouldn't have failed");
         } catch (IOException e) {
@@ -122,7 +122,7 @@ public class RPCClientTest {
         }
 
         try {
-            c.context("OR CPRS GUI CHART");
+            c.context(CreateContext.CONTEXT_CPRS);
         } catch (IOException e) {
             Assert.fail("Socket IO shouldn't have failed");
         }

@@ -18,12 +18,9 @@ package com.chrisuyehara.vista.rpc.procedures.XWB;
 
 import com.chrisuyehara.vista.rpc.RPCClient;
 import com.chrisuyehara.vista.rpc.TestHarness;
-import com.chrisuyehara.vista.rpc.procedures.XWB.CreateContext;
-import com.chrisuyehara.vista.rpc.procedures.XWB.SerializeTable;
+import com.chrisuyehara.vista.rpc.models.SymbolTable;
 import junit.framework.Assert;
 import org.junit.Test;
-
-import java.util.Map;
 
 /**
  * Date: 10/26/12
@@ -41,7 +38,7 @@ public class SerializeTableTest {
         SerializeTable serializeTable = new SerializeTable();
         rpcClient.call(serializeTable);
 
-        Map<String, String> symbolTable = serializeTable.getSymbolTable();
+        SymbolTable symbolTable = serializeTable.getSymbolTable();
 
         Assert.assertTrue(symbolTable.size() > 0);
         Assert.assertTrue(!symbolTable.get("DUZ").isEmpty());

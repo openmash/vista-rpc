@@ -18,11 +18,7 @@ package com.chrisuyehara.vista.rpc.procedures.XWB;
 
 import com.chrisuyehara.vista.rpc.RPCClient;
 import com.chrisuyehara.vista.rpc.TestHarness;
-import com.chrisuyehara.vista.rpc.parameters.KeyValuePair;
-import com.chrisuyehara.vista.rpc.parameters.ListParameter;
-import com.chrisuyehara.vista.rpc.parameters.OrderedList;
-import com.chrisuyehara.vista.rpc.procedures.RemoteProcedure;
-import com.chrisuyehara.vista.rpc.procedures.XWB.CreateContext;
+import com.chrisuyehara.vista.rpc.models.SymbolTable;
 import org.junit.Test;
 
 /**
@@ -38,15 +34,10 @@ public class DeserializeTableTest {
         rpcClient.login(TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
         rpcClient.context(CreateContext.CONTEXT_CPRS);
 
-        RemoteProcedure remoteProcedure = new RemoteProcedure("MDWS DESERIALIZE TABLE");
+        SymbolTable symbolTable = new SymbolTable();
+        symbolTable.put("DT", "123");
 
-        OrderedList orderedList = new OrderedList();
-
-        orderedList.add(new KeyValuePair("\"2\"","DT=3121024"));
-        orderedList.add(new KeyValuePair("\"3\"","%DT=\"T\""));
-
-        ListParameter listParameter = new ListParameter(orderedList);
-        remoteProcedure.addParameter(listParameter);
+        DeserializeTable remoteProcedure = new DeserializeTable(symbolTable);
 
         rpcClient.call(remoteProcedure);
 
