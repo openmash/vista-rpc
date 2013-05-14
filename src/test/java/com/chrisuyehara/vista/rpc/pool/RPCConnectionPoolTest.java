@@ -18,7 +18,7 @@ package com.chrisuyehara.vista.rpc.pool;
 
 import com.chrisuyehara.vista.rpc.TestHarness;
 import com.chrisuyehara.vista.rpc.procedures.XWB.ImHere;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;

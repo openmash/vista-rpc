@@ -21,7 +21,7 @@ import com.chrisuyehara.vista.rpc.exceptions.LoginException;
 import com.chrisuyehara.vista.rpc.models.NewPerson;
 import com.chrisuyehara.vista.rpc.procedures.XUS.GetUserInfo;
 import com.chrisuyehara.vista.rpc.procedures.XWB.CreateContext;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;

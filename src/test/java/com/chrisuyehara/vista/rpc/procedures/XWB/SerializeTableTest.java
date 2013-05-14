@@ -19,7 +19,7 @@ package com.chrisuyehara.vista.rpc.procedures.XWB;
 import com.chrisuyehara.vista.rpc.RPCClient;
 import com.chrisuyehara.vista.rpc.TestHarness;
 import com.chrisuyehara.vista.rpc.models.SymbolTable;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

@@ -19,7 +19,7 @@ package com.chrisuyehara.vista.rpc;
 import com.chrisuyehara.vista.rpc.exceptions.LoginException;
 import com.chrisuyehara.vista.rpc.parameters.GlobalParameter;
 import com.chrisuyehara.vista.rpc.procedures.RemoteProcedure;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;

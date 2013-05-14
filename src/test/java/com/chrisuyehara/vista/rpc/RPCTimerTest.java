@@ -18,7 +18,7 @@ package com.chrisuyehara.vista.rpc;
 
 import com.chrisuyehara.vista.rpc.procedures.XUS.GetUserInfo;
 import com.chrisuyehara.vista.rpc.procedures.XWB.ImHere;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
