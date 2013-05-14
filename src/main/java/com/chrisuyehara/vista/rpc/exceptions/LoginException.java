@@ -16,28 +16,21 @@
 
 package com.chrisuyehara.vista.rpc.exceptions;
 
-/**
- * Date: 9/17/12
- * Time: 2:20 PM
- */
-public class CallException extends Exception {
+public class LoginException extends Exception {
 
-    public CallException() {
-    }
-
-    public CallException(String message) {
-        super(message);
-    }
-
-    public CallException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public CallException(Throwable cause) {
+    public LoginException(Throwable cause) {
         super(cause);
     }
 
-    public CallException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
+    public LoginException(String message, Throwable cause) {
+        super(message, cause);
     }
+
+    public LoginException(String message) {
+        super(message);
+    }
+
+    public LoginException() {
+    }
+
 }

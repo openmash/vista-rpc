@@ -33,8 +33,4 @@ public class ConnectException extends Exception {
         super(cause);
     }
 
-    public ConnectException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
-
 }
