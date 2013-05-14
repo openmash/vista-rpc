@@ -49,7 +49,6 @@ public class RPCConnectionPoolThread implements Runnable {
         QUEUE.offer(poolSource.getInitialPoolSize());
     }
 
-    @Override
     public void run() {
         Callable<RPCConnection> worker = connectionFactory;
 

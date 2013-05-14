@@ -22,7 +22,6 @@ public class StreamParameter implements Parameter {
 
     public static final String BROKER_VALUE = "5";
 
-    @Override
     public String toParameter() {
         /**
          * Not implemented as documented in PRS5+37^XWBPRS

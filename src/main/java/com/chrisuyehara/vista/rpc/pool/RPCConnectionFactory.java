@@ -59,7 +59,6 @@ public class RPCConnectionFactory implements Callable<RPCConnection> {
         return connection;
     }
 
-    @Override
     public RPCConnection call() throws Exception {
         return build();
     }

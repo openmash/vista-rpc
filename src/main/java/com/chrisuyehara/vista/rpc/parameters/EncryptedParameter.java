@@ -32,7 +32,6 @@ public class EncryptedParameter implements Parameter {
         rpcString = new RPCString("1" + unencryptedValue + "1");
     }
 
-    @Override
     public String toParameter() {
         StringBuffer sb = new StringBuffer();
         sb.append(BROKER_VALUE);

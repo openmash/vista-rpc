@@ -28,7 +28,6 @@ public class ReferenceParameter implements Parameter {
         rpcString = new RPCString(value);
     }
 
-    @Override
     public String toParameter() {
         StringBuffer sb = new StringBuffer();
         sb.append(BROKER_VALUE);

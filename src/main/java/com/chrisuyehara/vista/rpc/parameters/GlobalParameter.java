@@ -50,7 +50,6 @@ public class GlobalParameter implements Parameter {
         rpcStringValue = new RPCString(value);
     }
 
-    @Override
     public String toParameter() {
         StringBuffer sb = new StringBuffer();
         sb.append(BROKER_VALUE);

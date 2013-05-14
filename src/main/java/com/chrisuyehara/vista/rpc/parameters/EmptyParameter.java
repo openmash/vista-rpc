@@ -22,7 +22,6 @@ public class EmptyParameter implements Parameter {
 
     public static final String BROKER_VALUE = "4";
 
-    @Override
     public String toParameter() {
         StringBuffer sb = new StringBuffer();
         sb.append(BROKER_VALUE);

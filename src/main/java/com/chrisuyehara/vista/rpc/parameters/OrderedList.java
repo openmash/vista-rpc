@@ -51,7 +51,6 @@ public class OrderedList implements Iterable<KeyValuePair> {
         return keyValuePairs.size();
     }
 
-    @Override
     public Iterator<KeyValuePair> iterator() {
         return keyValuePairs.iterator();
     }
