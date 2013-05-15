@@ -35,9 +35,9 @@ public class RPCTimerTest {
 
     @Test
     public void testTimerLong() throws Exception {
-        RPCClient rpcClient = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
-
-        rpcClient.login(TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
+    	RPCConfiguration cfg = RPCConfiguration.instance();
+        RPCClient rpcClient = new RPCClient(cfg.getHost(), cfg.getPort());
+        rpcClient.login(cfg.getAccess(), cfg.getVerify());
 
         Thread.sleep(1000 * 60 * 10);
 
@@ -50,9 +50,9 @@ public class RPCTimerTest {
 
     @Test
     public void testTimerShort() throws Exception {
-        RPCClient rpcClient = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
-
-        rpcClient.login(TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
+    	RPCConfiguration cfg = RPCConfiguration.instance();
+        RPCClient rpcClient = new RPCClient(cfg.getHost(), cfg.getPort());
+        rpcClient.login(cfg.getAccess(), cfg.getVerify());
 
         Thread.sleep(1000 * 60 * 2);
 
@@ -65,8 +65,9 @@ public class RPCTimerTest {
 
     @Test
     public void testTimeout() throws Exception {
+    	RPCConfiguration cfg = RPCConfiguration.instance();
         RPCSocket rpcSocket = new RPCSocket();
-        rpcSocket.connect(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
+        rpcSocket.connect(cfg.getHost(), cfg.getPort());
 
         Assert.assertTrue(rpcSocket.isConnected());
 

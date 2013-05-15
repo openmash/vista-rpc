@@ -17,7 +17,7 @@
 package com.chrisuyehara.vista.rpc.procedures.XWB;
 
 import com.chrisuyehara.vista.rpc.RPCClient;
-import com.chrisuyehara.vista.rpc.TestHarness;
+import com.chrisuyehara.vista.rpc.RPCConfiguration;
 import com.chrisuyehara.vista.rpc.models.SymbolTable;
 import org.junit.Test;
 
@@ -29,9 +29,9 @@ public class DeserializeTableTest {
 
     @Test
     public void deserializeTest() throws Exception {
-        RPCClient rpcClient = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
-
-        rpcClient.login(TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
+    	RPCConfiguration cfg = RPCConfiguration.instance();
+        RPCClient rpcClient = new RPCClient(cfg.getHost(), cfg.getPort());
+        rpcClient.login(cfg.getAccess(), cfg.getVerify());
         rpcClient.context(CreateContext.CONTEXT_CPRS);
 
         SymbolTable symbolTable = new SymbolTable();

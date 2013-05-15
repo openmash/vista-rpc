@@ -16,7 +16,6 @@
 
 package com.chrisuyehara.vista.rpc.pool;
 
-import com.chrisuyehara.vista.rpc.TestHarness;
 import com.chrisuyehara.vista.rpc.procedures.XWB.ImHere;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,9 +31,7 @@ public class RPCConnectionPoolTest {
     @Test
     public void testRPCConnectionPool() throws Exception {
         RPCConnectionPool connectionPool = RPCConnectionPool.getInstance();
-
-        RPCConnectionPoolSource poolSource = new RPCConnectionPoolSource(TestHarness.VISTA_HOSTNAME,
-                TestHarness.VISTA_PORT, TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
+        RPCConnectionPoolSource poolSource = new RPCConnectionPoolSource();
 
         int initialPoolSize = 2;
         poolSource.setInitialPoolSize(initialPoolSize);
@@ -61,13 +58,7 @@ public class RPCConnectionPoolTest {
     @Test
     public void testPoolExpansion() throws Exception {
         RPCConnectionPool connectionPool = RPCConnectionPool.getInstance();
-
-        RPCConnectionPoolSource poolSource = new RPCConnectionPoolSource(TestHarness.VISTA_HOSTNAME,
-                TestHarness.VISTA_PORT, TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
-        poolSource.setInitialPoolSize(10);
-        poolSource.setExpandPoolSize(8);
-        poolSource.setMinPoolSize(5);
-        poolSource.setMaxPoolSize(10);
+        RPCConnectionPoolSource poolSource = new RPCConnectionPoolSource();
 
         System.out.println("Initial: " + poolSource.getInitialPoolSize());
         System.out.println("Expansion: " + poolSource.getExpandPoolSize());
@@ -96,11 +87,7 @@ public class RPCConnectionPoolTest {
 
     @Test
     public void testSetPoolSource() throws Exception {
-        RPCConnectionPoolSource poolSource = new RPCConnectionPoolSource(TestHarness.VISTA_HOSTNAME,
-                TestHarness.VISTA_PORT, TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
-        poolSource.setInitialPoolSize(2);
-        poolSource.setExpandPoolSize(4);
-        poolSource.setMaxPoolSize(6);
+        RPCConnectionPoolSource poolSource = new RPCConnectionPoolSource();
 
         RPCConnectionPool instance = RPCConnectionPool.getInstance();
         instance.setPoolSource(poolSource);

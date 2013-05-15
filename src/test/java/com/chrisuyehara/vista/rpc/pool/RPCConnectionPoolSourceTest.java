@@ -16,10 +16,11 @@
 
 package com.chrisuyehara.vista.rpc.pool;
 
-import com.chrisuyehara.vista.rpc.TestHarness;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.chrisuyehara.vista.rpc.RPCConfiguration;
 
 /**
  * Date: 11/1/12
@@ -31,114 +32,143 @@ public class RPCConnectionPoolSourceTest {
 
     @BeforeClass
     public static void beforeClass() {
-        poolSource = new RPCConnectionPoolSource(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT, TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
-        poolSource.setInitialPoolSize(4);
-        poolSource.setExpandPoolSize(2);
-        poolSource.setMaxPoolSize(5);
+        poolSource = new RPCConnectionPoolSource();
     }
 
     @Test
     public void testGetHostName() throws Exception {
-        Assert.assertTrue(poolSource.getHostName().equals(TestHarness.VISTA_HOSTNAME));
+        Assert.assertEquals(RPCConfiguration.instance().getHost(), poolSource.getHostName());
     }
 
     @Test
     public void testSetHostName() throws Exception {
         String hostName = poolSource.getHostName();
         String newHostName = "TEST.VISTAEHR.COM";
+
         poolSource.setHostName(newHostName);
-        Assert.assertTrue(newHostName.equals(poolSource.getHostName()));
+        Assert.assertEquals(newHostName, poolSource.getHostName());
+
         poolSource.setHostName(hostName);
-        Assert.assertTrue(TestHarness.VISTA_HOSTNAME.equals(hostName));
+        Assert.assertEquals(hostName, poolSource.getHostName());
     }
 
     @Test
     public void testGetPort() throws Exception {
-        Assert.assertTrue(poolSource.getPort() == TestHarness.VISTA_PORT);
+        Assert.assertEquals(RPCConfiguration.instance().getPort(), poolSource.getPort());
     }
 
     @Test
     public void testSetPort() throws Exception {
         int port = poolSource.getPort();
         int newPort = 1234;
+
         poolSource.setPort(newPort);
-        Assert.assertTrue(newPort == poolSource.getPort());
+        Assert.assertEquals(newPort, poolSource.getPort());
+
         poolSource.setPort(port);
-        Assert.assertTrue(TestHarness.VISTA_PORT == port);
+        Assert.assertEquals(port, poolSource.getPort());
     }
 
     @Test
     public void testGetAccessCode() throws Exception {
-        Assert.assertTrue(poolSource.getAccessCode().equals(TestHarness.ACCESS_CODE));
+        Assert.assertEquals(RPCConfiguration.instance().getAccess(), poolSource.getAccessCode());
     }
 
     @Test
     public void testSetAccessCode() throws Exception {
         String accessCode = poolSource.getAccessCode();
         String newAccessCode = "abc123";
+
         poolSource.setAccessCode(newAccessCode);
-        Assert.assertTrue(poolSource.getAccessCode().equals(newAccessCode));
+        Assert.assertEquals(newAccessCode, poolSource.getAccessCode());
+
         poolSource.setAccessCode(accessCode);
-        Assert.assertTrue(TestHarness.ACCESS_CODE.equals(accessCode));
+        Assert.assertEquals(accessCode, poolSource.getAccessCode());
     }
 
     @Test
     public void testGetVerifyCode() throws Exception {
-        Assert.assertTrue(poolSource.getVerifyCode().equals(TestHarness.VERIFY_CODE));
+        Assert.assertEquals(RPCConfiguration.instance().getVerify(), poolSource.getVerifyCode());
     }
 
     @Test
     public void testSetVerifyCode() throws Exception {
         String verifyCode = poolSource.getVerifyCode();
         String newVerifyCode = "adsfasdf";
+
         poolSource.setVerifyCode(newVerifyCode);
-        Assert.assertTrue(newVerifyCode.equals(poolSource.getVerifyCode()));
+        Assert.assertEquals(newVerifyCode, poolSource.getVerifyCode());
+
         poolSource.setVerifyCode(verifyCode);
-        Assert.assertTrue(TestHarness.VERIFY_CODE.equals(verifyCode));
+        Assert.assertEquals(verifyCode, poolSource.getVerifyCode());
     }
 
     @Test
     public void testGetInitialPoolSize() throws Exception {
-        Assert.assertTrue(poolSource.getInitialPoolSize() == TestHarness.INITIAL_POOL_SIZE);
+        Assert.assertEquals(RPCConfiguration.instance().getInitialPoolSize(), poolSource.getInitialPoolSize());
     }
 
     @Test
     public void testSetInitialPoolSize() throws Exception {
         int initialPoolSize = poolSource.getInitialPoolSize();
         int newPoolSize = 99;
+
         poolSource.setInitialPoolSize(newPoolSize);
-        Assert.assertTrue(newPoolSize == poolSource.getInitialPoolSize());
+        Assert.assertEquals(newPoolSize, poolSource.getInitialPoolSize());
+
         poolSource.setInitialPoolSize(initialPoolSize);
-        Assert.assertTrue(initialPoolSize == poolSource.getInitialPoolSize());
+        Assert.assertEquals(initialPoolSize, poolSource.getInitialPoolSize());
     }
 
     @Test
     public void testGetExpandPoolSize() throws Exception {
-        Assert.assertTrue(poolSource.getExpandPoolSize() == TestHarness.EXPAND_POOL_SIZE);
+        Assert.assertEquals(RPCConfiguration.instance().getExpandPoolSize(), poolSource.getExpandPoolSize());
     }
 
     @Test
     public void testSetExpandPoolSize() throws Exception {
         int expandPoolSize = poolSource.getExpandPoolSize();
         int newPoolSize = 123;
+
         poolSource.setExpandPoolSize(newPoolSize);
-        Assert.assertTrue(newPoolSize == poolSource.getExpandPoolSize());
+        Assert.assertEquals(newPoolSize, poolSource.getExpandPoolSize());
+
         poolSource.setExpandPoolSize(expandPoolSize);
-        Assert.assertTrue(TestHarness.EXPAND_POOL_SIZE == poolSource.getExpandPoolSize());
+        Assert.assertEquals(expandPoolSize, poolSource.getExpandPoolSize());
+    }
+
+    @Test
+    public void testGetMinPoolSize() throws Exception {
+        Assert.assertEquals(RPCConfiguration.instance().getMinPoolSize(), poolSource.getMinPoolSize());
+    }
+
+    @Test
+    public void testSetMinPoolSize() throws Exception {
+        int minPoolSize = poolSource.getMinPoolSize();
+        int newPoolSize = 50;
+
+        poolSource.setMinPoolSize(newPoolSize);
+        Assert.assertEquals(newPoolSize, poolSource.getMinPoolSize());
+
+        poolSource.setMinPoolSize(minPoolSize);
+        Assert.assertEquals(minPoolSize, poolSource.getMinPoolSize());
     }
 
     @Test
     public void testGetMaxPoolSize() throws Exception {
-        Assert.assertTrue(poolSource.getMaxPoolSize() == TestHarness.MAX_POOL_SIZE);
+        Assert.assertEquals(RPCConfiguration.instance().getMaxPoolSize(), poolSource.getMaxPoolSize());
     }
 
     @Test
     public void testSetMaxPoolSize() throws Exception {
         int maxPoolSize = poolSource.getMaxPoolSize();
         int newPoolSize = 50;
+
         poolSource.setMaxPoolSize(newPoolSize);
-        Assert.assertTrue(newPoolSize == poolSource.getMaxPoolSize());
+        Assert.assertEquals(newPoolSize, poolSource.getMaxPoolSize());
+
         poolSource.setMaxPoolSize(maxPoolSize);
-        Assert.assertTrue(TestHarness.MAX_POOL_SIZE == poolSource.getMaxPoolSize());
+        Assert.assertEquals(maxPoolSize, poolSource.getMaxPoolSize());
     }
+
 }

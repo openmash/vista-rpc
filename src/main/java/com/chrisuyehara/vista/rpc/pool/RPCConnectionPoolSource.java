@@ -16,6 +16,8 @@
 
 package com.chrisuyehara.vista.rpc.pool;
 
+import com.chrisuyehara.vista.rpc.RPCConfiguration;
+
 public class RPCConnectionPoolSource {
 
     private String hostName;
@@ -23,19 +25,25 @@ public class RPCConnectionPoolSource {
     private String accessCode;
     private String verifyCode;
 
-    private int initialPoolSize = 4;
-    private int expandPoolSize = 2;
-    private int minPoolSize = 5;
-    private int maxPoolSize = 10;
+    private int initialPoolSize;
+    private int expandPoolSize;
+    private int minPoolSize;
+    private int maxPoolSize;
 
     public RPCConnectionPoolSource() {
+    	this(RPCConfiguration.instance());
     }
 
-    public RPCConnectionPoolSource(String hostName, int port, String accessCode, String verifyCode) {
-        this.hostName = hostName;
-        this.port = port;
-        this.accessCode = accessCode;
-        this.verifyCode = verifyCode;
+    public RPCConnectionPoolSource(RPCConfiguration cfg) {
+    	hostName = cfg.getHost();
+    	port = cfg.getPort();
+    	accessCode = cfg.getAccess();
+    	verifyCode = cfg.getVerify();
+
+        initialPoolSize = cfg.getInitialPoolSize();
+        expandPoolSize = cfg.getExpandPoolSize();
+        minPoolSize = cfg.getMinPoolSize();
+        maxPoolSize = cfg.getMaxPoolSize();
     }
 
     public String getHostName() {

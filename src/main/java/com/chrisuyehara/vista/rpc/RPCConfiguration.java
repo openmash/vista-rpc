@@ -37,6 +37,10 @@ public class RPCConfiguration {
 	public static final String DEF_PORT = "9220";
 	public static final String DEF_ACCESS = "secret";
 	public static final String DEF_VERIFY = "secret";
+	public static final int DEF_INITIAL_POOL_SIZE = 5;
+	public static final int DEF_EXPAND_POOL_SIZE = 2;
+	public static final int DEF_MIN_POOL_SIZE = 5;
+	public static final int DEF_MAX_POOL_SIZE = 10;
 	
 	public static void loadConfiguration(RPCConfiguration cfg, InputStream is) {
 		if (is != null) {
@@ -83,7 +87,7 @@ public class RPCConfiguration {
     }
 
 	private String host = DEF_HOST;
-	private String port = DEF_PORT;
+	private int port = Integer.valueOf(DEF_PORT);
 	private String access = DEF_ACCESS;
 	private String verify = DEF_VERIFY;
 
@@ -96,12 +100,15 @@ public class RPCConfiguration {
 		}
 	}
 
-	public String getPort() {
+	public int getPort() {
 		return port;
+	}
+	public void setPort(int port) {
+		this.port = port;
 	}
 	public void setPort(String port) {
 		if (port != null) {
-			this.port = port;
+			this.port = Integer.valueOf(port);
 		}
 	}
 
@@ -121,6 +128,22 @@ public class RPCConfiguration {
 		if (verify != null) {
 			this.verify = verify;
 		}
+	}
+
+	public int getInitialPoolSize() {
+		return DEF_INITIAL_POOL_SIZE;
+	}
+
+	public int getExpandPoolSize() {
+		return DEF_EXPAND_POOL_SIZE;
+	}
+
+	public int getMinPoolSize() {
+		return DEF_MIN_POOL_SIZE;
+	}
+
+	public int getMaxPoolSize() {
+		return DEF_MAX_POOL_SIZE;
 	}
 
 }

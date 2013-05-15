@@ -16,11 +16,12 @@
 
 package com.chrisuyehara.vista.rpc.procedures.XWB;
 
-import com.chrisuyehara.vista.rpc.RPCClient;
-import com.chrisuyehara.vista.rpc.TestHarness;
-import com.chrisuyehara.vista.rpc.models.SymbolTable;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.chrisuyehara.vista.rpc.RPCClient;
+import com.chrisuyehara.vista.rpc.RPCConfiguration;
+import com.chrisuyehara.vista.rpc.models.SymbolTable;
 
 /**
  * Date: 10/26/12
@@ -30,9 +31,9 @@ public class SerializeTableTest {
 
     @Test
     public void serializeTest() throws Exception {
-        RPCClient rpcClient = new RPCClient(TestHarness.VISTA_HOSTNAME, TestHarness.VISTA_PORT);
-
-        rpcClient.login(TestHarness.ACCESS_CODE, TestHarness.VERIFY_CODE);
+    	RPCConfiguration cfg = RPCConfiguration.instance();
+        RPCClient rpcClient = new RPCClient(cfg.getHost(), cfg.getPort());
+        rpcClient.login(cfg.getAccess(), cfg.getVerify());
         rpcClient.context(CreateContext.CONTEXT_CPRS);
 
         SerializeTable serializeTable = new SerializeTable();
