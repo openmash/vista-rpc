@@ -25,41 +25,34 @@ public class RPCStringTest {
     public void testPackLiteralPass() {
         String s = RPCString.packLiteral("TEST", 3);
 
-        Assert.assertTrue("004TEST".equals(s));
+        Assert.assertEquals("004TEST", s);
     }
 
     @Test
-    public void testPackLiteralFail() {
-        String s = RPCString.packLiteral("TEST", 3);
-
-        Assert.assertFalse("005TEST".equals(s));
-    }
-
-    @Test
-    public void testPackVariablePass() {
+    public void testPackVariablePass1() {
         String s = RPCString.packVariable("XWB");
 
-        Assert.assertTrue("|3XWB".equals(s));
+        Assert.assertEquals("|\u0003XWB", s);
     }
 
     @Test
-    public void testPackVariableFail() {
+    public void testPackVariablePass2() {
         String s = RPCString.packVariable("XWBB");
 
-        Assert.assertFalse("|3XWB".equals(s));
+        Assert.assertEquals("|\u0004XWBB", s);
     }
 
     @Test
     public void testPackStringPass1() {
         String s = RPCString.packString("XWB");
 
-        Assert.assertTrue("\u0003XWB".equals(s));
+        Assert.assertEquals("\u0003XWB", s);
     }
 
     @Test
     public void testPackStringPass2() {
         String s = RPCString.packString("XWB", 3);
 
-        Assert.assertTrue("003XWB".equals(s));
+        Assert.assertEquals("003XWB", s);
     }
 }

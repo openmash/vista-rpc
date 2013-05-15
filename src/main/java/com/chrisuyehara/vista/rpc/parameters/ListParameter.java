@@ -16,47 +16,53 @@
 
 package com.chrisuyehara.vista.rpc.parameters;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.chrisuyehara.vista.rpc.RPCString;
 
 public class ListParameter implements Parameter {
-
     public static final String BROKER_VALUE = "2";
-
-    OrderedList orderedList;
+    private Map<String, String> params = new LinkedHashMap<String, String>();
 
     public ListParameter() {
-        orderedList = new OrderedList();
     }
 
-    public ListParameter(OrderedList orderedList) {
-        this.orderedList = orderedList;
+    public ListParameter(final ListParameter other) {
+    	this(other != null ? other.getParams() : null);
     }
 
-    public OrderedList getOrderedList() {
-        return orderedList;
+    public ListParameter(Map<String, String> params) {
+    	if (params != null) {
+    		this.params.putAll(params);
+    	}
     }
 
-    public void setOrderedList(OrderedList orderedList) {
-        this.orderedList = orderedList;
+    public Map<String, String> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, String> params) {
+    	this.params.clear();
+        this.params.putAll(params);
     }
 
     public String toParameter() {
         StringBuffer sb = new StringBuffer();
         sb.append(BROKER_VALUE);
 
-        synchronized (orderedList) {
-            if (null == orderedList || 0 == orderedList.size()) {
+        synchronized (params) {
+            if (params.size() == 0) {
                 sb.append(RPCString.packString("", PACK_STRING_LENGTH));
                 sb.append("f");
             } else {
-                for (KeyValuePair keyValuePair : orderedList) {
-                    String key = keyValuePair.getKey();
-                    String value = keyValuePair.getValue();
+                for (Map.Entry<String, String> kvPair : params.entrySet()) {
+                    String value = kvPair.getValue();
 
-                    if (null == value || "".equalsIgnoreCase(value)) {
+                    if (value == null || value.length() == 0) {
                         value = "\u0001";
                     }
-                    sb.append(RPCString.packString(key, PACK_STRING_LENGTH));
+                    sb.append(RPCString.packString(kvPair.getKey(), PACK_STRING_LENGTH));
                     sb.append(RPCString.packString(value, PACK_STRING_LENGTH));
                     sb.append("t");
                 }

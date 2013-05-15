@@ -16,11 +16,13 @@
 
 package com.chrisuyehara.vista.rpc.procedures;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.junit.Test;
-import com.chrisuyehara.vista.rpc.parameters.KeyValuePair;
+
 import com.chrisuyehara.vista.rpc.parameters.ListParameter;
 import com.chrisuyehara.vista.rpc.parameters.LiteralParameter;
-import com.chrisuyehara.vista.rpc.parameters.OrderedList;
 
 public class RemoteProcedureTest {
 
@@ -29,13 +31,13 @@ public class RemoteProcedureTest {
         RemoteProcedure r = new RemoteProcedure("TIU UPDATE RECORD");
         LiteralParameter literal = new LiteralParameter("3");
 
-        OrderedList o = new OrderedList();
-        o.add(new KeyValuePair(".01", "20"));
-        o.add(new KeyValuePair("1201", "1"));
-        o.add(new KeyValuePair("1301", "3120513.1724"));
-        o.add(new KeyValuePair("1701", ""));
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put(".01", "20");
+        params.put("1201", "1");
+        params.put("1301", "3120513.1724");
+        params.put("1701", "");
 
-        ListParameter list = new ListParameter(o);
+        ListParameter list = new ListParameter(params);
 
         r.addParameter(literal);
         r.addParameter(list);

@@ -16,20 +16,35 @@
 
 package com.chrisuyehara.vista.rpc.parameters;
 
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.junit.Assert;
+
 import org.junit.Test;
 
 public class ListParameterTest {
 
     @Test
     public void testListParameter() {
-        ListParameter l = new ListParameter();
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put("chris", "uyehara");
+        params.put("shanti", "wada");
+        params.put("hadrian", "hadrian");
+        params.put("ed", "ost");
+        params.remove("hadrian");
+        params.put("mike", "stark");
+        params.put("hadrian", "hadrian");
+        params.remove("shanti");
 
-        OrderedList o = new OrderedList();
-        o.add(new KeyValuePair("chris", "uyehara"));
-        o.add(new KeyValuePair("shanti", "wada"));
+        ListParameter lp = new ListParameter(params);
+        Iterator<String> it = lp.getParams().values().iterator();
 
-        l.setOrderedList(o);
-
-        System.out.println(l.toParameter());
+        Assert.assertEquals(4, lp.getParams().size());
+        Assert.assertEquals("uyehara", it.next());
+        Assert.assertEquals("ost", it.next());
+        Assert.assertEquals("stark", it.next());
+        Assert.assertEquals("hadrian", it.next());
     }
 }

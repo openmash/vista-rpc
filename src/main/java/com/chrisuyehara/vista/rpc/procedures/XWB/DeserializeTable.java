@@ -16,9 +16,11 @@
 
 package com.chrisuyehara.vista.rpc.procedures.XWB;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.chrisuyehara.vista.rpc.models.SymbolTable;
 import com.chrisuyehara.vista.rpc.parameters.ListParameter;
-import com.chrisuyehara.vista.rpc.parameters.OrderedList;
 import com.chrisuyehara.vista.rpc.procedures.RemoteProcedure;
 
 /**
@@ -32,12 +34,12 @@ public class DeserializeTable extends RemoteProcedure {
     public DeserializeTable(SymbolTable symbolTable) {
         super("XWB DESERIALIZE");
 
-        OrderedList rpcList = new OrderedList();
+        Map<String, String> rpcList = new LinkedHashMap<String, String>();
 
         int i = 1;
         for (String key : symbolTable.keySet()) {
             String value = key + RECORD_SEPARATOR + symbolTable.get(key);
-            rpcList.add(Integer.toString(i), value);
+            rpcList.put(Integer.toString(i), value);
             i++;
         }
 
