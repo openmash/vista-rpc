@@ -36,10 +36,7 @@ public class RPCClient {
     private RPCTimer rpcTimer;
     private long timeout = 1000 * 60 * 2; /* 1000 ms * 60 sec * 2 = 2 minutes */
     private boolean managedRPCClient = true;
-
     private String context;
-
-    private boolean validAvCode = false;
 
     /**
      * Create a managed RPC Client that will connect to the given VistA instance using the hostName and port. The
@@ -149,11 +146,9 @@ public class RPCClient {
         AvCode avCode = new AvCode(accessCode, verifyCode);
         call(avCode);
         if (!avCode.isLoggedIn()) {
-            validAvCode = false;
             throw new LoginException("Invalid access or verify code.");
         }
 
-        this.validAvCode = true;
         this.context = "";
     }
 

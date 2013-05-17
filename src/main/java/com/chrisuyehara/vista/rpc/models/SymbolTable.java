@@ -19,8 +19,9 @@ package com.chrisuyehara.vista.rpc.models;
 import java.util.LinkedHashMap;
 
 public class SymbolTable extends LinkedHashMap<String, String> {
+	private static final long serialVersionUID = 1L;
 
-    public SymbolTable() {
+	public SymbolTable() {
     }
 
     public boolean isAuthenticated() {

@@ -17,8 +17,9 @@
 package com.chrisuyehara.vista.rpc.exceptions;
 
 public class LoginException extends Exception {
+	private static final long serialVersionUID = 1L;
 
-    public LoginException(Throwable cause) {
+	public LoginException(Throwable cause) {
         super(cause);
     }
 

@@ -16,7 +16,6 @@
 
 package com.chrisuyehara.vista.rpc.parameters;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class StreamParameter implements Parameter {
 
@@ -26,7 +25,7 @@ public class StreamParameter implements Parameter {
         /**
          * Not implemented as documented in PRS5+37^XWBPRS
          **/
-        throw new NotImplementedException();
+        throw new RuntimeException("Not implemented");
     }
 
 }

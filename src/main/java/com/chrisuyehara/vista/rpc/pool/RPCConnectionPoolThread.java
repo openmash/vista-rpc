@@ -19,7 +19,12 @@ package com.chrisuyehara.vista.rpc.pool;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Date: 11/1/12
@@ -31,7 +36,7 @@ public class RPCConnectionPoolThread implements Runnable {
     private RPCConnectionFactory connectionFactory = null;
     private RPCConnectionPoolSource poolSource = null;
 
-    private static ExecutorService executorService = null;
+    private static ExecutorService executorService = Executors.newCachedThreadPool();
 
     private static final LinkedBlockingQueue<Integer> QUEUE = new LinkedBlockingQueue<Integer>();
     private static final List<Future<RPCConnection>> FUTURES = new ArrayList<Future<RPCConnection>>();
@@ -44,7 +49,6 @@ public class RPCConnectionPoolThread implements Runnable {
         this.pool = pool;
         this.connectionFactory = connectionFactory;
         this.poolSource = connectionFactory.getPoolSource();
-        this.executorService = Executors.newCachedThreadPool();
 
         QUEUE.offer(poolSource.getInitialPoolSize());
     }
@@ -90,9 +94,7 @@ public class RPCConnectionPoolThread implements Runnable {
                     }
                 }
 
-            } catch (InterruptedException e) {
-                e.printStackTrace(); // TODO log exception
-            } catch (ExecutionException e) {
+            } catch (Exception e) {
                 e.printStackTrace(); // TODO log exception
             }
         }
